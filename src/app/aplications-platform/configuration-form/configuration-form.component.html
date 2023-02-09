@@ -1,0 +1,360 @@
+<nav class="page-breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/dashboard">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Configuración Formato</li>
+    </ol>
+</nav>  
+<div class="row">
+    <div class="col-md-12 stretch-card">
+      <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">Formato</h6>
+            <form [formGroup]="formato" *ngIf="formato" (ngSubmit)="guardarFormato(formato)">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">¿Cuál es su país de residencia permanente?</label>
+                      <input type="text" class="form-control" placeholder="Dijite pais residencia" formControlName="formatoPaisResidencia">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">¿Cuál es su nacionalidad?</label>
+                      <input type="text" class="form-control" placeholder="Dijite nacionalidad" formControlName="formatoNacionalidad">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Sexo</label>
+                      <select class="form-select" formControlName="formatoSexo" #formatoSexo>
+                          <option *ngFor="let genero of listaGeneros" [value]="genero.value">
+                              {{genero.label}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">Edad</label>
+                      <input type="number" class="form-control" placeholder="Dijite edad" formControlName="formatoEdad">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">¿Con quien viaja?	</label>
+                      <select class="form-select" formControlName="formatoConQuienViaja" #formatoConQuienViaja>
+                          <option *ngFor="let genero of listaConQuienViaja" [value]="genero.value">
+                              {{genero.label}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">¿Cuál? </label>
+                      <input type="text" class="form-control" placeholder="Dijite cual" formControlName="formatoConQuienViajaCual" [readOnly]="formConQuienViajaCualSoloLectura">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">¿Incluyéndolo a usted con cuantas personas viaja? </label>
+                      <input type="number" class="form-control" placeholder="Dijite cantidad" formControlName="formatoCantidadPersonasViaje" [readOnly]="formCantidadPersonasViaje">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">¿Cuál fue el principal motivo de este viaje?</label>
+                      <select class="form-select" formControlName="formatoMotivoViaje" #formatoMotivoViaje (change)="changeMotivoViaje(formatoMotivoViaje.value)">
+                          <option *ngFor="let genero of listaMotivoViaje" [value]="genero.value">
+                              {{genero.label}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mb-3">
+                      <label class="form-label">¿Cuál? </label>
+                      <input type="text" class="form-control" placeholder="Dijite cual" formControlName="formatoMotivoViajeCual" [readOnly]="formMotivoViaje">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="mb-3">
+                      <label class="form-label">7. ¿Cómo organizó su viaje?</label>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoComoOrganizoViajeUno" formControlName="formatoComoOrganizoViajeUno">
+                        <label class="form-check-label" for="formatoComoOrganizoViajeUno">
+                          1. Paquete turístico organizado por una agencia de viajes en Colombia	
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoComoOrganizoViajeDos" formControlName="formatoComoOrganizoViajeDos">
+                        <label class="form-check-label" for="formatoComoOrganizoViajeDos">
+                          2. Paquete turístico organizado por una agencia de viajes en el país de visita
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoComoOrganizoViajeTres" formControlName="formatoComoOrganizoViajeTres">
+                        <label class="form-check-label" for="formatoComoOrganizoViajeTres">
+                          3. Paquete turístico organizado por terceros que no sean agencias de viajes
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoComoOrganizoViajeCuatro" formControlName="formatoComoOrganizoViajeCuatro">
+                        <label class="form-check-label" for="formatoComoOrganizoViajeCuatro">
+                          4. Viaje organizado por cuenta propia
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoComoOrganizoViajeCinco" formControlName="formatoComoOrganizoViajeCinco">
+                        <label class="form-check-label" for="formatoComoOrganizoViajeCinco">
+                          5. Otro     ¿Cuál?
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="mb-3">
+                      <label class="form-label">8. ¿Qué tipo de servicios comprendió el paquete turístico? </label>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoPaqueteTuristicoUno" formControlName="formatoPaqueteTuristicoUno">
+                        <label class="form-check-label" for="formatoPaqueteTuristicoUno">
+                          1. Alojamiento
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoPaqueteTuristicoDos" formControlName="formatoPaqueteTuristicoDos">
+                        <label class="form-check-label" for="formatoPaqueteTuristicoDos">
+                          2. Transporte internacional
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoPaqueteTuristicoTres" formControlName="formatoPaqueteTuristicoTres">
+                        <label class="form-check-label" for="formatoPaqueteTuristicoTres">
+                          3. Alimentos y bebidas 
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoPaqueteTuristicoCuatro" formControlName="formatoPaqueteTuristicoCuatro">
+                        <label class="form-check-label" for="formatoPaqueteTuristicoCuatro">
+                          4. Servicios culturales y de entretenimiento.
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoPaqueteTuristicoCinco" formControlName="formatoPaqueteTuristicoCinco">
+                        <label class="form-check-label" for="formatoPaqueteTuristicoCinco">
+                          5. Servicios deportivos y recreacionales 
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoPaqueteTuristicoSeis" formControlName="formatoPaqueteTuristicoSeis">
+                        <label class="form-check-label" for="formatoPaqueteTuristicoSeis">
+                          6. Tours en destino (con servicio de  guía)
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoPaqueteTuristicoSiete" formControlName="formatoPaqueteTuristicoSiete">
+                        <label class="form-check-label" for="formatoPaqueteTuristicoSiete">
+                          7. Transporte aéreo interno en el destino
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoPaqueteTuristicoOcho" (change)="changePaqueteTuristicoOcho($event)" formControlName="formatoPaqueteTuristicoOcho">
+                        <label class="form-check-label" for="formatoPaqueteTuristicoOcho">
+                          8. Otro transporte interno ¿Cuál? 
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="text" class="form-control" placeholder="Dijite cual" formControlName="formatoPaqueteTuristicoOchoCual" [readOnly]="formatoPaqueteTuristicoOchoCualSoloLectura">
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="formatoPaqueteTuristicoNueve" (change)="changePaqueteTuristicoNueve($event)" formControlName="formatoPaqueteTuristicoNueve">
+                        <label class="form-check-label" for="formatoPaqueteTuristicoNueve">
+                          9. Otro servicio. ¿Cuál?
+                        </label>
+                      </div>
+                      <div class="form-check mb-2">
+                        <input type="text" class="form-control" placeholder="Dijite cual" formControlName="formatoPaqueteTuristicoNueveCual" [readOnly]="formatoPaqueteTuristicoNueveCualSOloLectura">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <p>
+                        <b>CAPITULO III</b>
+                      </p>
+                      <p>
+                        Gastos: Registre el valor que fue pagado por Usted, por Terceros que NO hacen parte de su grupo de viaje y por Terceros que SI hacen parte de su grupo de viaje, así como el tipo de moneda utilizado y el número de personas que cubre cada gasto.
+                      </p>
+                      <p class="mb-4">
+                        9.
+                      </p>
+                      <table border="1" class="mb-4">
+                        <tr>
+                          <td>Gastos</td>
+                          <td>Hubo Gastos</td>
+                          <td>Pagado por usted</td>
+                          <td>Terceros que NO hacen parte del grupo</td>
+                          <td>Terceros que SI hacen parte del grupo</td>
+                          <td>¿Para cuantas personas?</td>
+                        </tr>
+                        <tr>
+                          <td>a. paquete turistico</td>
+                          <td>
+                            <select class="form-select" formControlName="formatoHuboGastosUno" #formatoHuboGastosUno>
+                                <option *ngFor="let genero of listaConfirmacion" [value]="genero.value">
+                                    {{genero.label}}
+                                </option>
+                            </select></td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">Valor</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoPagadoPorUstedValorUno">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label">Edad</label>
+                              <input type="number" class="form-control" placeholder="Dijite edad" formControlName="formatoPagadoPorUstedTipoMonedaUno">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">Valor</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoTercerosNoValorUno">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label">Edad</label>
+                              <input type="number" class="form-control" placeholder="Dijite edad" formControlName="formatoTercerosNoTipoMonedaUno">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">Valor</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoTercerosSiValorUno">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label">Edad</label>
+                              <input type="number" class="form-control" placeholder="Dijite edad" formControlName="formatoTercerosSiTipoMonedaUno">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoparaCuantasPersonasUno">
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>b. Transporte Internacional</td>
+                          <td>
+                            <select class="form-select" formControlName="formatoHuboGastosDos" #formatoHuboGastosDos>
+                                <option *ngFor="let genero of listaConfirmacion" [value]="genero.value">
+                                    {{genero.label}}
+                                </option>
+                            </select></td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">Edad</label>
+                              <input type="number" class="form-control" placeholder="Dijite edad" formControlName="formatoPagadoPorUstedValorDos">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label">Edad</label>
+                              <input type="number" class="form-control" placeholder="Dijite edad" formControlName="formatoPagadoPorUstedEdadDos">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">Valor</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoTercerosNoValorDos">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label">Edad</label>
+                              <input type="number" class="form-control" placeholder="Dijite edad" formControlName="formatoTercerosNoTipoMonedaDos">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">Valor</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoTercerosSiValorDos">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label">Edad</label>
+                              <input type="number" class="form-control" placeholder="Dijite edad" formControlName="formatoTercerosSiTipoMonedaDos">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoparaCuantasPersonasDos">
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <p class="mb-4">
+                        10. Por favor nombre los países de visita y el número de noches en cada forma de alojamiento utilizado.
+                      </p>
+                      <table border="1" class="mb-4">
+                        <tr>
+                          <td>País de visita</td>
+                          <td>Vivienda Propia</td>
+                          <td>Hotel / Apartahotel</td>
+                          <td>Vivienda familiar o de amigos</td>
+                          <td>Vivienda En alquiler</td>
+                          <td>Otro tipo de vivienda</td>
+                        </tr>
+                        <tr>
+                          <td>Venezuela</td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">#Noches</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoPaisNumNocheViviendaPropiaUno">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">#Noches</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoPaisNumNocheHotelUno">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">#Noches</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoPaisNumNocheViviendaFamiliarUno">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">#Noches</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoPaisNumNocheViviendaAlquilerUno">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="mb-3">
+                              <label class="form-label">#Noches</label>
+                              <input type="number" class="form-control" placeholder="Dijite valor" formControlName="formatoPaisNumNocheOtraViviendaUno">
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-primary submit" [disabled]="formato.invalid">Registrar</button>
+                  </div>
+                </div>                
+            </form>                
+        </div>
+      </div>
+    </div>
+</div>
